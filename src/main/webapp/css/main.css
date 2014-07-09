@@ -1,0 +1,248 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600&subset=latin,latin-ext);
+
+body {
+    color: #000000;
+    direction: ltr;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+    color: #444444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300 !important;
+}
+
+h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+a {
+    color: #0D638F;
+    text-shadow: none !important;
+}
+
+a, a:focus, a:hover, a:active {
+    outline: 0 none;
+}
+
+div, input, select, textarea, span, img, table, td, th, p, a, button, ul, code, pre, li {
+    border-radius: 0 !important;
+}
+
+.btn {
+    border-radius: 0 !important;
+    border-width: 0;
+    box-shadow: none !important;
+    font-size: 14px;
+    outline: medium none !important;
+    padding: 7px 14px;
+    text-shadow: none;
+}
+
+/****HEADER****/
+.header {
+    z-index: 990;
+    background: #212121 !important;
+    color: #EEEEEE !important;
+    height: 42px;
+    min-height: 42px;
+    border: none;
+}
+
+.header > .navbar-brand {
+    color: #FFFFFF !important;
+    font-size: 20px;
+    margin-left: 50px;
+    padding: 11px 0;
+    width: 150px;
+}
+
+.header .nav.navbar-nav a {
+    color: #DDDDDD;
+    padding: 11px 18px;
+}
+
+.header .nav.navbar-nav a:hover {
+    background: #383838;
+    color: #FFFFFF;
+}
+
+.header .navbar-nav > li.active > a {
+    background: none repeat scroll 0 0 #E02222 !important;
+    color: #FFFFFF !important;
+}
+
+/****CONTENT***/
+.content {
+    margin-bottom: 10px;
+    margin-top: 62px;
+    min-height: 670px;
+}
+
+.content-inner {
+
+}
+
+#historyMap {
+    height: 100%;
+    min-height: 600px;
+}
+
+/****FOOTER****/
+.footer {
+    background: #3D3D3D;
+    font-size: 12px;
+    padding: 8px 20px 5px;
+}
+
+.footer-inner {
+    color: #999999;
+    display: inline-block;
+    float: left;
+}
+
+/**COMPONENTS**/
+.toolbar {
+    margin-bottom: 15px;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    color: #CCCCCC;
+    display: block;
+    font-size: 16px;
+    height: 16px;
+    margin: 11px 2px 4px 10px;
+    position: absolute;
+    text-align: center;
+    width: 16px;
+}
+
+.input-icon input {
+    padding-left: 33px !important;
+}
+
+.form-control {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 0;
+    box-shadow: none;
+    color: #333333;
+    font-size: 14px;
+    font-weight: normal;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
+.form-control {
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #999999;
+    outline: 0 none;
+}
+
+/**COLORS**/
+.bg-blue {
+    background-color: #4B8DF8 !important;
+    background-image: none !important;
+    border-color: #4B8DF8 !important;
+    color: #FFFFFF !important;
+}
+
+.bg-red {
+    background-color: #E02222 !important;
+    background-image: none !important;
+    border-color: #E02222 !important;
+    color: #FFFFFF !important;
+}
+
+.bg-yellow {
+    background-color: #FFB848 !important;
+    background-image: none !important;
+    border-color: #FFB848 !important;
+    color: #FFFFFF !important;
+}
+
+.bg-green {
+    background-color: #35AA47 !important;
+    background-image: none !important;
+    border-color: #35AA47 !important;
+    color: #FFFFFF !important;
+}
+
+.bg-purple {
+    background-color: #852B99 !important;
+    background-image: none !important;
+    border-color: #852B99 !important;
+    color: #FFFFFF !important;
+}
+
+.bg-dark {
+    background-color: #555555 !important;
+    background-image: none !important;
+    border-color: #555555 !important;
+    color: #FFFFFF !important;
+}
+
+.be-grey {
+    background-color: #FAFAFA !important;
+    background-image: none !important;
+    border-color: #FAFAFA !important;
+}
+
+/**FONT AWESOME**/
+[class^="fa-"], [class*=" fa-"] {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 14px;
+    margin-top: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

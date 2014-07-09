@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="defaultTemplate" template="/WEB-INF/template/template.jsp">
+        <put-attribute name="title" value="Trak"/>
+        <put-attribute name="header" value="/WEB-INF/pages/header.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/pages/home.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/pages/footer.jsp"/>
+    </definition>
+
+    <definition name="home" extends="defaultTemplate">
+        <put-attribute name="content" value="/WEB-INF/pages/home.jsp"/>
+    </definition>
+
+    <definition name="shipment/list" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Lista przesyłek"/>
+        <put-attribute name="content" value="/WEB-INF/pages/shipment/list.jsp"/>
+    </definition>
+
+    <definition name="shipment/create" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Rejestracja przesyłki"/>
+        <put-attribute name="content" value="/WEB-INF/pages/shipment/create.jsp"/>
+    </definition>
+
+    <definition name="shipment/check" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Historia przesyłki"/>
+        <put-attribute name="content" value="/WEB-INF/pages/shipment/check.jsp"/>
+    </definition>
+
+    <definition name="shipment/history" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Historia przesyłki"/>
+        <put-attribute name="content" value="/WEB-INF/pages/shipment/history.jsp"/>
+    </definition>
+
+    <definition name="shipment/status/list" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Statusy przesyłek"/>
+        <put-attribute name="content" value="/WEB-INF/pages/shipment/status/list.jsp"/>
+    </definition>
+
+    <definition name="shipment/status/add" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Nowy status przesyłki"/>
+        <put-attribute name="content" value="/WEB-INF/pages/shipment/status/add.jsp"/>
+    </definition>
+
+    <definition name="shipment/status/edit" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Edycja statusu przesyłki"/>
+        <put-attribute name="content" value="/WEB-INF/pages/shipment/status/edit.jsp"/>
+    </definition>
+
+    <definition name="station/list" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Stacje"/>
+        <put-attribute name="content" value="/WEB-INF/pages/station/list.jsp"/>
+    </definition>
+
+    <definition name="station/add" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Nowa stacja"/>
+        <put-attribute name="content" value="/WEB-INF/pages/station/add.jsp"/>
+    </definition>
+
+    <definition name="station/edit" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Edycja stacji"/>
+        <put-attribute name="content" value="/WEB-INF/pages/station/edit.jsp"/>
+    </definition>
+
+    <!-- Vehicle -->
+    <definition name="vehicle/list" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Pojazdy"/>
+        <put-attribute name="content" value="/WEB-INF/pages/vehicle/list.jsp"/>
+    </definition>
+
+    <definition name="vehicle/create" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Nowy pojazd"/>
+        <put-attribute name="content" value="/WEB-INF/pages/vehicle/create.jsp"/>
+    </definition>
+
+    <definition name="vehicle/edit" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Edycja pojazdu"/>
+        <put-attribute name="content" value="/WEB-INF/pages/vehicle/edit.jsp"/>
+    </definition>
+
+    <definition name="user/list" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Użytkownicy"/>
+        <put-attribute name="content" value="/WEB-INF/pages/user/list.jsp"/>
+    </definition>
+
+    <definition name="user/add" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Nowy użytkownik"/>
+        <put-attribute name="content" value="/WEB-INF/pages/user/add.jsp"/>
+    </definition>
+
+    <definition name="user/edit" extends="defaultTemplate">
+        <put-attribute name="title" value="Trak - Edycja użytkownika"/>
+        <put-attribute name="content" value="/WEB-INF/pages/user/edit.jsp"/>
+    </definition>
+
+</tiles-definitions>
