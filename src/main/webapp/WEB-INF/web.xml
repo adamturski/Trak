@@ -36,7 +36,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>pl.com.turski.endpoint.MovementEndpoint,pl.com.turski.endpoint.LocationEndpoint</param-value>
+            <param-value>pl.com.turski.endpoint.MovementEndpoint,pl.com.turski.endpoint.LocationEndpoint,pl.com.turski.endpoint.ShipmentEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

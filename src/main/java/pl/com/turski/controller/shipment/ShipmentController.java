@@ -50,7 +50,7 @@ public class ShipmentController {
             return "shipment/create";
         }
 
-        shipmentService.create(shipment);
+        shipmentService.create(shipment,2L);
         return "redirect:/shipment/list";
     }
 
@@ -74,7 +74,7 @@ public class ShipmentController {
         if (result.hasErrors()) {
             return "shipment/check";
         }
-        boolean shipmentExist = shipmentService.shipmentExist(shipmentCheck.getId());
+        boolean shipmentExist = shipmentService.isExist(shipmentCheck.getId());
         if(!shipmentExist){
             result.rejectValue("id", "shipmentNotFound");
             return "shipment/check";

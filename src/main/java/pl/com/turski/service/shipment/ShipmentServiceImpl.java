@@ -12,8 +12,10 @@ import pl.com.turski.model.domain.address.Address;
 import pl.com.turski.model.domain.customer.Customer;
 import pl.com.turski.model.domain.shipment.Shipment;
 import pl.com.turski.model.domain.shipment.ShipmentStatusEnum;
+import pl.com.turski.model.domain.user.User;
 import pl.com.turski.model.view.shipment.ShipmentCreate;
 import pl.com.turski.repository.shipment.ShipmentRepository;
+import pl.com.turski.service.user.UserService;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -30,14 +32,17 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Autowired
     private ShipmentRepository shipmentRepository;
+    @Autowired
+    private UserService userService;
 
     @Override
-    public void create(@NotNull ShipmentCreate shipmentCreate) throws TechnicalException, BusinessException {
+    public Long create(@NotNull ShipmentCreate shipmentCreate, @NotNull Long userId) throws TechnicalException, BusinessException {
         LOG.debug("Creating shipment {}", shipmentCreate);
         Shipment shipment = new Shipment();
         shipment.setStatus(ShipmentStatusEnum.ACCEPTED);
         shipment.setCreated(new Date());
-        //TODO: Dodać użytkownika z sesji
+        User user = userService.get(userId);
+        shipment.setCreator(user);
         Customer sender = new Customer();
         sender.setCompany(shipmentCreate.getSenderCompany());
         sender.setName(shipmentCreate.getSenderName());
@@ -68,7 +73,8 @@ public class ShipmentServiceImpl implements ShipmentService {
         recipientAddress.setCountry(shipmentCreate.getRecipientCountry());
         recipient.setAddress(recipientAddress);
         shipment.setRecipient(recipient);
-        shipmentRepository.save(shipment);
+        shipment = shipmentRepository.save(shipment);
+        return shipment.getId();
     }
 
     @Override
@@ -93,14 +99,26 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public void setStatus(@NotNull Long id, @NotNull ShipmentStatusEnum status) throws TechnicalException, BusinessException {
-        LOG.debug("Changing shipment status [status='{}']", status);
+    public void startShipmentDelivery(@NotNull Long id, @NotNull Long userId) throws TechnicalException, BusinessException {
+        LOG.debug("Start shipment delivery [id='{}', userId='{}']", id, userId);
         Shipment shipment = get(id);
-        shipment.setStatus(status);
+        User user = userService.get(userId);
+        shipment.setDeliverer(user);
+        shipment.setStatus(ShipmentStatusEnum.IN_SERVICE);
     }
 
     @Override
-    public boolean shipmentExist(@NotNull Long id) {
+    public void endShipmentDelivery(@NotNull Long id, @NotNull Long userId) throws TechnicalException, BusinessException {
+        LOG.debug("End shipment delivery [id='{}']", id);
+        Shipment shipment = get(id);
+        User user = userService.get(userId);
+        shipment.setDeliverer(user);
+        shipment.setDelivered(new Date());
+        shipment.setStatus(ShipmentStatusEnum.DELIVERED);
+    }
+
+    @Override
+    public boolean isExist(@NotNull Long id) {
         LOG.debug("Checking that shipment exist [id='{}']", id);
         return shipmentRepository.exists(id);
     }

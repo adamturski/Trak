@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.com.turski.exception.BusinessException;
 import pl.com.turski.exception.TechnicalException;
 import pl.com.turski.model.domain.gate.Gate;
+import pl.com.turski.model.domain.gate.GateType;
 import pl.com.turski.model.domain.location.Location;
 import pl.com.turski.model.domain.shipment.Shipment;
 import pl.com.turski.model.domain.shipment.ShipmentMovement;
+import pl.com.turski.model.domain.shipment.ShipmentStatusEnum;
 import pl.com.turski.repository.shipment.ShipmentMovementRepository;
 import pl.com.turski.service.gate.GateService;
 
@@ -39,6 +41,11 @@ public class ShipmentMovementServiceImpl implements ShipmentMovementService {
         LOG.debug("Creating shipment movement [shipmentId='{}', gateId='{}']", shipmentId, gateId);
         Shipment shipment = shipmentService.get(shipmentId);
         Gate gate = gateService.get(gateId);
+        if (gate.getType() == GateType.IN) {
+            shipment.setStatus(ShipmentStatusEnum.IN_STATION);
+        } else if (gate.getType() == GateType.OUT) {
+            shipment.setStatus(ShipmentStatusEnum.ON_THE_WAY);
+        }
         ShipmentMovement shipmentMovement = new ShipmentMovement();
         shipmentMovement.setShipment(shipment);
         shipmentMovement.setGate(gate);
@@ -53,8 +60,8 @@ public class ShipmentMovementServiceImpl implements ShipmentMovementService {
     }
 
     @Override
-    public List<Location> getLocations(Long id) throws TechnicalException, BusinessException {
-        LOG.debug("Getting locations for shipment [shipmentId='{}']", id);
+    public List<Location> getLocations(@NotNull Long shipmentId) throws TechnicalException, BusinessException {
+        LOG.debug("Getting locations for shipment [shipmentId='{}']", shipmentId);
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

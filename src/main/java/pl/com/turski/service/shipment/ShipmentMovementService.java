@@ -19,5 +19,5 @@ public interface ShipmentMovementService {
 
     public List<ShipmentMovement> getMovements(@NotNull Long shipmentId) throws TechnicalException, BusinessException;
 
-    public List<Location> getLocations(Long shipmentId) throws TechnicalException, BusinessException;
+    public List<Location> getLocations(@NotNull Long shipmentId) throws TechnicalException, BusinessException;
 }

@@ -16,13 +16,15 @@ import java.util.List;
 @Validated
 public interface ShipmentService {
 
-    public void create(@NotNull ShipmentCreate shipmentCreate) throws TechnicalException, BusinessException;
+    public Long create(@NotNull ShipmentCreate shipmentCreate, @NotNull Long userId) throws TechnicalException, BusinessException;
 
     public Shipment get(@NotNull Long id) throws TechnicalException, BusinessException;
 
     public List<Shipment> getAll(ShipmentStatusEnum statusFilter) throws TechnicalException, BusinessException;
 
-    public void setStatus(@NotNull Long id, @NotNull ShipmentStatusEnum status) throws TechnicalException, BusinessException;
+    public void startShipmentDelivery(@NotNull Long id, @NotNull Long userId) throws TechnicalException, BusinessException;
 
-    public boolean shipmentExist(@NotNull Long id);
+    public void endShipmentDelivery(@NotNull Long id, @NotNull Long userId) throws TechnicalException, BusinessException;
+
+    public boolean isExist(@NotNull Long id);
 }

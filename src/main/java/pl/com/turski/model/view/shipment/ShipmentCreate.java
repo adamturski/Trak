@@ -2,10 +2,12 @@ package pl.com.turski.model.view.shipment;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.io.Serializable;
+
 /**
  * User: Adam
  */
-public class ShipmentCreate {
+public class ShipmentCreate implements Serializable {
 
     private String senderCompany;
     @NotBlank
