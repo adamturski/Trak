@@ -1,9 +1,9 @@
 package pl.com.turski.model.domain.vehicle;
 
 import org.hibernate.validator.constraints.NotBlank;
+import pl.com.turski.model.domain.gate.Gate;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * User: Adam
@@ -22,8 +22,9 @@ public class Vehicle {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "vehicle" )
-    private List<VehicleLocation> vehicleLocations;
+    @OneToOne
+    @JoinColumn(name = "gate_id", nullable = false)
+    private Gate gate;
 
     public Long getId() {
         return id;
@@ -49,11 +50,11 @@ public class Vehicle {
         this.description = description;
     }
 
-    public List<VehicleLocation> getVehicleLocations() {
-        return vehicleLocations;
+    public Gate getGate() {
+        return gate;
     }
 
-    public void setVehicleLocations(List<VehicleLocation> vehicleLocations) {
-        this.vehicleLocations = vehicleLocations;
+    public void setGate(Gate gate) {
+        this.gate = gate;
     }
 }
