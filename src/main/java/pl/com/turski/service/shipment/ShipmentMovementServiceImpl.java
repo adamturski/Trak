@@ -41,9 +41,9 @@ public class ShipmentMovementServiceImpl implements ShipmentMovementService {
         LOG.debug("Creating shipment movement [shipmentId='{}', gateId='{}']", shipmentId, gateId);
         Shipment shipment = shipmentService.get(shipmentId);
         Gate gate = gateService.get(gateId);
-        if (gate.getType() == GateType.IN) {
+        if (gate.getType() == GateType.STATION_IN) {
             shipment.setStatus(ShipmentStatusEnum.IN_STATION);
-        } else if (gate.getType() == GateType.OUT) {
+        } else if (gate.getType() == GateType.STATION_OUT) {
             shipment.setStatus(ShipmentStatusEnum.ON_THE_WAY);
         }
         ShipmentMovement shipmentMovement = new ShipmentMovement();
@@ -62,6 +62,6 @@ public class ShipmentMovementServiceImpl implements ShipmentMovementService {
     @Override
     public List<Location> getLocations(@NotNull Long shipmentId) throws TechnicalException, BusinessException {
         LOG.debug("Getting locations for shipment [shipmentId='{}']", shipmentId);
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 }
