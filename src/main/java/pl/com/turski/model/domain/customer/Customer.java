@@ -15,7 +15,7 @@ public class Customer {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "company", nullable = false)
+    @Column(name = "company")
     private String company;
 
     @Column(name = "name", nullable = false)
