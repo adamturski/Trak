@@ -98,6 +98,12 @@ public class ShipmentServiceImpl implements ShipmentService {
         return shipmentRepository.findByStatus(statusFilter);
     }
 
+    public void changeStatus(@NotNull Long id, @NotNull ShipmentStatusEnum status) throws TechnicalException, BusinessException {
+        LOG.debug("Changing shipment status [id={}, status={}]", id, status);
+        Shipment shipment = get(id);
+        shipment.setStatus(status);
+    }
+
     @Override
     public void startShipmentDelivery(@NotNull Long id, @NotNull Long userId) throws TechnicalException, BusinessException {
         LOG.debug("Start shipment delivery [id='{}', userId='{}']", id, userId);

@@ -1,9 +1,11 @@
 package pl.com.turski.model.domain.station;
 
 import pl.com.turski.model.domain.address.Address;
+import pl.com.turski.model.domain.gate.Gate;
 import pl.com.turski.model.domain.location.Location;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * User: Adam
@@ -29,6 +31,9 @@ public class Station {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id",nullable = false)
     private Location location;
+
+    @OneToMany(mappedBy = "station")
+    private List<Gate> gates;
 
     public Station() {
     }

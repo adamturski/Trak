@@ -1,7 +1,6 @@
 package pl.com.turski.model.domain.gate;
 
 import pl.com.turski.model.domain.station.Station;
-import pl.com.turski.model.domain.vehicle.Vehicle;
 
 import javax.persistence.*;
 
@@ -26,9 +25,6 @@ public class Gate {
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;
-
-    @OneToOne(mappedBy = "gate")
-    private Vehicle vehicle;
 
     public Long getId() {
         return id;
@@ -60,13 +56,5 @@ public class Gate {
 
     public void setStation(Station station) {
         this.station = station;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
     }
 }

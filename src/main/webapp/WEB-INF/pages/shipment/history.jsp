@@ -65,32 +65,29 @@
             <table class="table table-hover table-stripped">
                 <thead>
                 <tr>
-                    <th>Data</th>
                     <th>Stacja</th>
                     <th>Adres</th>
-                    <th>Typ przesunięcia</th>
+                    <th>Data przyjazdu</th>
+                    <th>Data odjazdu</th>
                 </tr>
                 </thead>
                 <c:forEach var="shipmentMovement" items="${shipmentMovements}">
                     <tr>
-                        <td>${shipmentMovement.created}</td>
-                        <td>${shipmentMovement.gate.station.name}
-                            <c:if test="${shipmentMovement.gate.station.description}!=null">
+                        <td>${shipmentMovement.station.name}</td>
+                            <c:if test="${not empty shipmentMovement.station.description}">
                                 <br/>
-                                ${shipmentMovement.gate.station.description}
+                                ${shipmentMovement.station.description}
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${shipmentMovement.gate.station.address!=null}">
-                                ${shipmentMovement.gate.station.address.street}, ${shipmentMovement.gate.station.address.house}
-                                <c:if test="${not empty shipmentMovement.gate.station.address.flat}"> m. ${shipmentMovement.gate.station.address.flat}</c:if>
-                                , ${shipmentMovement.gate.station.address.postcode} ${shipmentMovement.gate.station.address.city}
+                            <c:if test="${shipmentMovement.station.address!=null}">
+                                ${shipmentMovement.station.address.street}, ${shipmentMovement.station.address.house}
+                                <c:if test="${not empty shipmentMovement.station.address.flat}"> m. ${shipmentMovement.station.address.flat}</c:if>
+                                , ${shipmentMovement.station.address.postcode} ${shipmentMovement.station.address.city}
                             </c:if>
                         </td>
-                        <td>
-                            <c:if test="${shipmentMovement.gate.type=='IN'}">Przesyłka dostarczona do stacji</c:if>
-                            <c:if test="${shipmentMovement.gate.type=='OUT'}">Przesyłka opuściła stację</c:if>
-                        </td>
+                        <td>${shipmentMovement.arrivalDate}</td>
+                        <td>${shipmentMovement.departureDate}</td>
                     </tr>
                 </c:forEach>
             </table>
@@ -103,7 +100,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#historyMapPanel">
-                                Pokaż drogę przesyłki
+                                Droga przesyłki
                             </a>
                         </h4>
                     </div>

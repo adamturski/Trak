@@ -22,6 +22,8 @@ public interface ShipmentService {
 
     public List<Shipment> getAll(ShipmentStatusEnum statusFilter) throws TechnicalException, BusinessException;
 
+    public void changeStatus(@NotNull Long id, @NotNull ShipmentStatusEnum status) throws TechnicalException, BusinessException;
+
     public void startShipmentDelivery(@NotNull Long id, @NotNull Long userId) throws TechnicalException, BusinessException;
 
     public void endShipmentDelivery(@NotNull Long id, @NotNull Long userId) throws TechnicalException, BusinessException;

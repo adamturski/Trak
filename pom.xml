@@ -18,12 +18,28 @@
     </pluginRepositories>
 
     <properties>
+        <app-id>modern-radius-498</app-id>
         <appengine.app.version>1</appengine.app.version>
-        <appengine.target.version>1.9.3</appengine.target.version>
+        <appengine.target.version>1.9.9</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <cloudsql.url>jdbc:google:mysql://trak/?user=root</cloudsql.url>
-        <cloudsql.url.dev>jdbc:mysql://127.0.0.1:3306/trak?user=root</cloudsql.url.dev>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <database.url>jdbc:google:mysql://modern-radius-498:trak-db/trak?user=root</database.url>
+                <database.driverClassName>com.mysql.jdbc.GoogleDriver</database.driverClassName>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <database.url>jdbc:mysql://127.0.0.1:3306/trak?characterEncoding=utf-8</database.url>
+                <database.driverClassName>com.mysql.jdbc.Driver</database.driverClassName>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!-- Compile/runtime dependencies -->
@@ -221,9 +237,15 @@
                 <configuration>
                     <address>0.0.0.0</address>
                     <jvmFlags>
-                        <jvmFlag>-XX:MaxPermSize=2048m</jvmFlag>
+                        <jvmFlag>-XX:MaxPermSize=4048m</jvmFlag>
                     </jvmFlags>
                 </configuration>
+                <executions>
+                    <execution>
+                      <phase>deploy</phase>
+                      <goals><goal>endpoints_get_client_lib</goal></goals>
+                    </execution>
+                  </executions>
             </plugin>
         </plugins>
     </build>

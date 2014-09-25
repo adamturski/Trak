@@ -1,6 +1,6 @@
 USE trak;
 
-DELETE FROM shipment_movement;
+DELETE FROM shipmentmovement;
 DELETE FROM shipment;
 DELETE FROM customer;
 DELETE FROM vehicle_location;
@@ -11,7 +11,7 @@ DELETE FROM location;
 DELETE FROM address;
 DELETE FROM user;
 
-ALTER TABLE shipment_movement AUTO_INCREMENT = 1;
+ALTER TABLE shipmentmovement AUTO_INCREMENT = 1;
 ALTER TABLE shipment AUTO_INCREMENT = 1;
 ALTER TABLE customer AUTO_INCREMENT = 1;
 ALTER TABLE gate AUTO_INCREMENT = 1;
@@ -149,29 +149,29 @@ INSERT INTO shipment VALUES (DEFAULT, '2014-07-02 08:50:26', null, 'ACCEPTED', 2
 INSERT INTO shipment VALUES (DEFAULT, '2014-07-02 09:50:26', null, 'ACCEPTED', 2, null, 7, 4);
 
 INSERT INTO shipment VALUES (DEFAULT, '2014-07-02 09:50:26', null, 'ON_THE_WAY', 2, null, 6, 5);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 10:00:26', 37, 5);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 11:01:00', 38, 5);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 12:00:00', 1, 5);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 13:00:00', 4, 5);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 10:00:26', null, 5, 1);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 11:01:00', null, 5, 2);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 12:00:00', null, 5, 3);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 13:00:00', null, 5, 4);
 
 INSERT INTO shipment VALUES (DEFAULT, '2014-07-02 11:50:26', null, 'IN_STATION', 2, null, 5, 6);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 12:00:26', 39, 6);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 13:00:00', 40, 6);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 14:00:00', 8, 6);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 12:00:26', null, 6, 5);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 13:00:00', null, 6, 6);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 14:00:00', null, 6, 7);
 
 INSERT INTO shipment VALUES (DEFAULT, '2014-07-02 11:50:26', null, 'IN_SERVICE', 2, null, 4, 7);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 12:00:26', 41, 7);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 13:00:00', 42, 7);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 14:00:00', 14, 7);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 15:00:00', 17, 7);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 16:00:00', 19, 7);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 12:00:26', null, 7, 8);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 13:00:00', null, 7, 9);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 14:00:00', null, 7, 10);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 15:00:00', null, 7, 1);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 16:00:00', null, 7, 2);
 
 INSERT INTO shipment VALUES (DEFAULT, '2014-07-02 11:50:26', '2014-07-02 20:50:26', 'DELIVERED', 2, 2, 4, 7);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 12:00:26', 43, 8);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 13:00:00', 44, 8);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 14:00:00', 19, 8);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 15:00:00', 22, 8);
-INSERT INTO shipment_movement VALUES (DEFAULT, '2014-07-02 16:00:00', 25, 8);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 12:00:26', null, 8, 3);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 13:00:00', null, 8, 4);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 14:00:00', null, 8, 5);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 15:00:00', null, 8, 6);
+INSERT INTO shipmentmovement VALUES (DEFAULT, '2014-07-02 16:00:00', null, 8, 7);
 
 -- Vehicle
 INSERT INTO gate VALUES (DEFAULT, 'Bramka wyjściowa nr 1', 'VEHICLE', NULL);

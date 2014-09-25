@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import pl.com.turski.exception.BusinessException;
 import pl.com.turski.exception.TechnicalException;
 import pl.com.turski.model.endpoint.*;
+import pl.com.turski.service.shipment.ShipmentMovementService;
 import pl.com.turski.service.shipment.ShipmentService;
 import pl.com.turski.spring.ApplicationContextHolder;
 
@@ -47,5 +48,11 @@ public class ShipmentEndpoint {
         shipmentService.endShipmentDelivery(endShipmentRequest.getShipmentId(), endShipmentRequest.getUserId());
     }
 
+    @ApiMethod(name = "movementFromGate", httpMethod = "post")
+    public void movementFromGate(@Named("shipmentId") Long shipmentId, @Named("gateId") Long gateId) throws TechnicalException, BusinessException {
+        LOG.debug("Adding movement from gate in endpoint [shipmentId='{}', gateId='{}']", shipmentId, gateId);
+        ShipmentMovementService shipmentMovementService = ApplicationContextHolder.getContext().getBean(ShipmentMovementService.class);
+        shipmentMovementService.movementFromGate(shipmentId, gateId);
+    }
 
 }

@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <security:http pattern="/_ah/**" security="none" />
+    <security:http pattern="/_ah/**" security="none"/>
 
     <security:http use-expressions="true" entry-point-ref="gaeEntryPoint">
         <security:intercept-url pattern="/" access="permitAll"/>
@@ -13,15 +13,14 @@
         <security:custom-filter position="PRE_AUTH_FILTER" ref="gaeFilter"/>
     </security:http>
 
-    <bean id="gaeEntryPoint" class="pl.com.turski.security.GoogleAccountsAuthenticationEntryPoint"/>
-
-    <bean id="gaeFilter" class="pl.com.turski.security.GaeAuthenticationFilter">
-        <property name="authenticationManager" ref="authenticationManager"/>
-    </bean>
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="gaeAuthenticationProvider"/>
     </security:authentication-manager>
+
+    <bean id="gaeEntryPoint" class="pl.com.turski.security.GoogleAccountsAuthenticationEntryPoint"/>
+
+    <bean id="gaeFilter" class="pl.com.turski.security.GaeAuthenticationFilter"/>
 
     <bean id="gaeAuthenticationProvider" class="pl.com.turski.security.GoogleAccountsAuthenticationProvider"/>
 

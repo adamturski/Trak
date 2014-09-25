@@ -40,17 +40,17 @@ public class ShipmentController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String getCreate(Model model) {
-        model.addAttribute("shipment", new ShipmentCreate());
+        model.addAttribute("shipmentCreate", new ShipmentCreate());
         return "shipment/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("shipment") ShipmentCreate shipment, BindingResult result) {
+    public String create(@Valid @ModelAttribute("shipmentCreate") ShipmentCreate shipmentCreate, BindingResult result) {
         if (result.hasErrors()) {
             return "shipment/create";
         }
 
-        shipmentService.create(shipment,2L);
+        shipmentService.create(shipmentCreate,2L);
         return "redirect:/shipment/list";
     }
 
@@ -85,14 +85,14 @@ public class ShipmentController {
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     public String history(ModelMap model, @RequestParam(value = "id") Long id) {
-        model.put("shipment", shipmentService.get(id));
+        model.addAttribute("shipment", shipmentService.get(id));
         List<ShipmentMovement> movements = shipmentMovementService.getMovements(id);
-        model.put("shipmentMovements", movements);
+        model.addAttribute("shipmentMovements", movements);
         List<Location> locations = new ArrayList<>();
         for (ShipmentMovement movement : movements) {
-            locations.add(movement.getGate().getStation().getLocation());
+            locations.add(movement.getStation().getLocation());
         }
-        model.put("locations", locations);
+        model.addAttribute("locations", locations);
 
         return "shipment/history";
     }

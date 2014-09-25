@@ -10,7 +10,7 @@
             <h1>Nowa przesyłka</h1>
         </div>
     </div>
-    <form:form method="post" action="/shipment/create" modelAttribute="shipment"
+    <form:form method="post" action="/shipment/create" modelAttribute="shipmentCreate"
                cssClass="form-horizontal">
         <div class="row">
             <div class="col-lg-5">

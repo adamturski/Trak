@@ -9,10 +9,10 @@ import pl.com.turski.exception.BusinessException;
 import pl.com.turski.exception.TechnicalException;
 import pl.com.turski.model.domain.gate.Gate;
 import pl.com.turski.model.domain.gate.GateType;
-import pl.com.turski.model.domain.location.Location;
 import pl.com.turski.model.domain.shipment.Shipment;
 import pl.com.turski.model.domain.shipment.ShipmentMovement;
 import pl.com.turski.model.domain.shipment.ShipmentStatusEnum;
+import pl.com.turski.model.domain.station.Station;
 import pl.com.turski.repository.shipment.ShipmentMovementRepository;
 import pl.com.turski.service.gate.GateService;
 
@@ -37,31 +37,37 @@ public class ShipmentMovementServiceImpl implements ShipmentMovementService {
     private GateService gateService;
 
     @Override
-    public void create(@NotNull Long shipmentId, @NotNull Long gateId) throws TechnicalException, BusinessException {
-        LOG.debug("Creating shipment movement [shipmentId='{}', gateId='{}']", shipmentId, gateId);
-        Shipment shipment = shipmentService.get(shipmentId);
-        Gate gate = gateService.get(gateId);
-        if (gate.getType() == GateType.STATION_IN) {
-            shipment.setStatus(ShipmentStatusEnum.IN_STATION);
-        } else if (gate.getType() == GateType.STATION_OUT) {
-            shipment.setStatus(ShipmentStatusEnum.ON_THE_WAY);
-        }
-        ShipmentMovement shipmentMovement = new ShipmentMovement();
-        shipmentMovement.setShipment(shipment);
-        shipmentMovement.setGate(gate);
-        shipmentMovement.setCreated(new Date());
-        shipmentMovementRepository.save(shipmentMovement);
-    }
-
-    @Override
     public List<ShipmentMovement> getMovements(@NotNull Long shipmentId) throws TechnicalException, BusinessException {
         LOG.debug("Getting movements for shipment [shipmentId='{}']", shipmentId);
-        return shipmentMovementRepository.findByShipment_Id(shipmentId);
+        Shipment shipment = shipmentService.get(shipmentId);
+        List<ShipmentMovement> movements = shipment.getMovements();
+        movements.size();
+        return movements;
     }
 
     @Override
-    public List<Location> getLocations(@NotNull Long shipmentId) throws TechnicalException, BusinessException {
-        LOG.debug("Getting locations for shipment [shipmentId='{}']", shipmentId);
-        return null;
+    public void movementFromGate(@NotNull Long shipmentId, @NotNull Long gateId) {
+        LOG.debug("Received movement from gate [shipmentId={}, gateId={}]", shipmentId, gateId);
+        Gate gate = gateService.get(gateId);
+        Station station = gate.getStation();
+        Shipment shipment = shipmentService.get(shipmentId);
+        if (gate.getType() == GateType.IN) {
+            shipment.setStatus(ShipmentStatusEnum.IN_STATION);
+            shipmentService.changeStatus(shipmentId, ShipmentStatusEnum.IN_STATION);
+            ShipmentMovement shipmentMovement = new ShipmentMovement();
+            shipmentMovement.setStation(gate.getStation());
+            shipmentMovement.setShipment(shipment);
+            shipmentMovement.setArrivalDate(new Date());
+            shipmentMovementRepository.save(shipmentMovement);
+        } else {
+            shipment.setStatus(ShipmentStatusEnum.ON_THE_WAY);
+            ShipmentMovement shipmentMovement = shipmentMovementRepository.getLastMovement(shipment.getId(), station.getId());
+            if (shipmentMovement == null) {
+                LOG.warn("Shipment departure without arrival [shipmentId={}]",shipmentId);
+                return;
+            }
+
+            shipmentMovement.setDepartureDate(new Date());
+        }
     }
 }

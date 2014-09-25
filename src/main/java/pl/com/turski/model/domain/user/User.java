@@ -1,12 +1,13 @@
 package pl.com.turski.model.domain.user;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * User: Adam
  */
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

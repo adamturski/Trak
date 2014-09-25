@@ -1,10 +1,13 @@
 package pl.com.turski.model.domain.shipment;
 
 import pl.com.turski.model.domain.customer.Customer;
+import pl.com.turski.model.domain.transport.Transport;
 import pl.com.turski.model.domain.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: Adam
@@ -18,22 +21,22 @@ public class Shipment {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private ShipmentStatusEnum status;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recipient_id", nullable = false)
+    @JoinColumn(name = "recipient_id")
     private Customer recipient;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sender_id", nullable = false)
+    @JoinColumn(name = "sender_id")
     private Customer sender;
 
     @ManyToOne
-    @JoinColumn(name = "creator_id", nullable = false)
+    @JoinColumn(name = "creator_id")
     private User creator;
 
-    @Column(name = "created",nullable = false)
+    @Column(name = "created")
     private Date created;
 
     @ManyToOne
@@ -42,6 +45,12 @@ public class Shipment {
 
     @Column(name = "delivered")
     private Date delivered;
+
+    @OneToMany(mappedBy = "shipment")
+    private List<Transport> transports = new ArrayList<>();
+
+    @OneToMany(mappedBy = "shipment")
+    private List<ShipmentMovement> movements = new ArrayList<>();
 
     public Shipment() {
     }
@@ -108,5 +117,17 @@ public class Shipment {
 
     public void setDelivered(Date delivered) {
         this.delivered = delivered;
+    }
+
+    public List<Transport> getTransports() {
+        return transports;
+    }
+
+    public void setTransports(List<Transport> transports) {
+        this.transports = transports;
+    }
+
+    public List<ShipmentMovement> getMovements() {
+        return movements;
     }
 }

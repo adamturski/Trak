@@ -1,6 +1,6 @@
 package pl.com.turski.model.domain.shipment;
 
-import pl.com.turski.model.domain.gate.Gate;
+import pl.com.turski.model.domain.station.Station;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * User: Adam
  */
-@Entity(name = "shipment_movement")
+@Entity
 public class ShipmentMovement {
 
     @Id
@@ -21,11 +21,14 @@ public class ShipmentMovement {
     private Shipment shipment;
 
     @ManyToOne
-    @JoinColumn(name = "gate_id", nullable = false)
-    private Gate gate;
+    @JoinColumn(name = "station_id", nullable = false)
+    private Station station;
 
-    @Column(name = "created", nullable = false)
-    private Date created;
+    @Column(name = "arrival_date")
+    private Date arrivalDate;
+
+    @Column(name = "departure_date")
+    private Date departureDate;
 
     public Long getId() {
         return id;
@@ -43,19 +46,27 @@ public class ShipmentMovement {
         this.shipment = shipment;
     }
 
-    public Gate getGate() {
-        return gate;
+    public Station getStation() {
+        return station;
     }
 
-    public void setGate(Gate gate) {
-        this.gate = gate;
+    public void setStation(Station station) {
+        this.station = station;
     }
 
-    public Date getCreated() {
-        return created;
+    public Date getArrivalDate() {
+        return arrivalDate;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 }

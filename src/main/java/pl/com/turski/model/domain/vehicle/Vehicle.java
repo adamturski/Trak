@@ -1,7 +1,6 @@
 package pl.com.turski.model.domain.vehicle;
 
 import org.hibernate.validator.constraints.NotBlank;
-import pl.com.turski.model.domain.gate.Gate;
 
 import javax.persistence.*;
 
@@ -21,10 +20,6 @@ public class Vehicle {
 
     @Column(name = "description")
     private String description;
-
-    @OneToOne
-    @JoinColumn(name = "gate_id", nullable = false)
-    private Gate gate;
 
     public Long getId() {
         return id;
@@ -48,13 +43,5 @@ public class Vehicle {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Gate getGate() {
-        return gate;
-    }
-
-    public void setGate(Gate gate) {
-        this.gate = gate;
     }
 }

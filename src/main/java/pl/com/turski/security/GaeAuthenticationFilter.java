@@ -4,6 +4,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -30,8 +32,12 @@ public class GaeAuthenticationFilter extends GenericFilterBean {
 
     private static final Logger LOG = LoggerFactory.getLogger(GaeAuthenticationFilter.class);
 
-    private AuthenticationDetailsSource ads = new WebAuthenticationDetailsSource();
+    @Autowired
+    @Qualifier("authenticationManager")
     private AuthenticationManager authenticationManager;
+
+    private AuthenticationDetailsSource ads = new WebAuthenticationDetailsSource();
+
     private AuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler();
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -59,10 +65,6 @@ public class GaeAuthenticationFilter extends GenericFilterBean {
         }
 
         chain.doFilter(request, response);
-    }
-
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
     }
 
     public void setFailureHandler(AuthenticationFailureHandler failureHandler) {
