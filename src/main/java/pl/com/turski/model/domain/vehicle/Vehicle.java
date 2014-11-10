@@ -7,19 +7,19 @@ import javax.persistence.*;
 /**
  * User: Adam
  */
-@Entity
+@Entity(name = "vehicle")
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "name", nullable = false)
+    @Column(name = "registration_number", nullable = false, unique = true)
     @NotBlank
-    private String name;
-
-    @Column(name = "description")
-    private String description;
+    private String registrationNumber;
+    @Column(name = "gps_locator")
+    private String gpsLocator;
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
 
     public Long getId() {
         return id;
@@ -29,19 +29,27 @@ public class Vehicle {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRegistrationNumber() {
+        return registrationNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
-    public String getDescription() {
-        return description;
+    public String getGpsLocator() {
+        return gpsLocator;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setGpsLocator(String gpsLocator) {
+        this.gpsLocator = gpsLocator;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

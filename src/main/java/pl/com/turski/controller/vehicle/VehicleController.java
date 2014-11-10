@@ -38,7 +38,13 @@ public class VehicleController {
             return "vehicle/create";
         }
 
-        vehicleService.create(vehicle.getName(), vehicle.getDescription());
+        boolean vehicleExist = vehicleService.isExist(vehicle.getRegistrationNumber());
+        if (vehicleExist) {
+            result.rejectValue("registrationNumber", "vehicleDuplicate");
+            return "vehicle/create";
+        }
+
+        vehicleService.create(vehicle.getRegistrationNumber(), vehicle.getGpsLocator());
 
         return "redirect:/vehicle/list";
     }
@@ -56,7 +62,7 @@ public class VehicleController {
             return "vehicle/edit";
         }
 
-        vehicleService.update(vehicle.getId(),vehicle.getName(),vehicle.getDescription());
+        vehicleService.update(vehicle.getId(), vehicle.getRegistrationNumber(), vehicle.getGpsLocator());
 
         return "redirect:/vehicle/list";
     }

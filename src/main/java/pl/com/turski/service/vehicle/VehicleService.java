@@ -15,13 +15,15 @@ import java.util.List;
 @Validated
 public interface VehicleService {
 
-    public void create(@NotBlank String name, String description) throws TechnicalException, BusinessException;
+    void create(@NotBlank String name, String description) throws TechnicalException, BusinessException;
 
-    public void update(@NotNull Long id, @NotBlank String name, String description) throws TechnicalException, BusinessException;
+    void update(@NotNull Long id, @NotBlank String name, String description) throws TechnicalException, BusinessException;
 
-    public Vehicle get(@NotNull Long id) throws TechnicalException, BusinessException;
+    Vehicle get(@NotNull Long id) throws TechnicalException, BusinessException;
 
-    public List<Vehicle> getAll() throws TechnicalException, BusinessException;
+    List<Vehicle> getAll() throws TechnicalException, BusinessException;
 
-    public void delete(@NotNull Long id) throws TechnicalException, BusinessException;
+    void delete(@NotNull Long id) throws TechnicalException, BusinessException;
+
+    Boolean isExist(@NotBlank String registrationNumber);
 }

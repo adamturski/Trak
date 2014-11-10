@@ -13,23 +13,23 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Nazwa</th>
-                    <th>Opis</th>
+                    <th>Numer rejstracyjny</th>
+                    <th>Lokalizator GPS</th>
                     <th></th>
                 </tr>
                 </thead>
                 <c:forEach var="vehicle" items="${vehicles}">
                     <tr>
                         <td>${vehicle.id}</td>
-                        <td>${vehicle.name}</td>
-                        <td>${vehicle.description}</td>
+                        <td>${vehicle.registrationNumber}</td>
+                        <td>${vehicle.gpsLocator}</td>
                         <td>
                             <div>
                                 <c:url var="editUrl" value="/vehicle/edit">
                                     <c:param name="vehicleId" value="${vehicle.id}"/>
                                 </c:url>
                                 <a href="${editUrl}" class="btn btn-info"><i class="fa fa-edit"></i> Edytuj</a>
-                                <c:url var="deleteUrl" value="/station/delete">
+                                <c:url var="deleteUrl" value="/vehicle/delete">
                                     <c:param name="vehicleId" value="${vehicle.id}"/>
                                 </c:url>
                                 <a href="${deleteUrl}" class="btn btn-danger"><i class="fa fa-times"></i> Usuń</a>

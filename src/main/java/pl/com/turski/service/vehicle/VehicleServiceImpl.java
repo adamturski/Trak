@@ -28,20 +28,21 @@ public class VehicleServiceImpl implements VehicleService {
     private VehicleRepository vehicleRepository;
 
     @Override
-    public void create(@NotBlank String name, String description) throws TechnicalException, BusinessException {
-        LOG.debug("Creating vehicle [name='{}', description='{}']", name, description);
+    public void create(@NotBlank String registrationNumber, String gpsLocator) throws TechnicalException, BusinessException {
+        LOG.debug("Creating vehicle [registrationNumber='{}', gpsLocator='{}']", registrationNumber, gpsLocator);
         Vehicle vehicle = new Vehicle();
-        vehicle.setName(name);
-        vehicle.setDescription(description);
+        vehicle.setRegistrationNumber(registrationNumber);
+        vehicle.setGpsLocator(gpsLocator);
+        vehicle.setEnabled(Boolean.TRUE);
         vehicleRepository.save(vehicle);
     }
 
     @Override
-    public void update(@NotNull Long id, @NotBlank String name, String description) throws TechnicalException, BusinessException {
-        LOG.debug("Updating vehicle [id='{}', name='{}', description='{}']", id, name, description);
+    public void update(@NotNull Long id, @NotBlank String registrationNumber, String gpsLocator) throws TechnicalException, BusinessException {
+        LOG.debug("Updating vehicle [id='{}', registrationNumber='{}', gpsLocator='{}']", id, registrationNumber, gpsLocator);
         Vehicle vehicle = get(id);
-        vehicle.setName(name);
-        vehicle.setDescription(description);
+        vehicle.setRegistrationNumber(registrationNumber);
+        vehicle.setGpsLocator(gpsLocator);
         vehicleRepository.save(vehicle);
     }
 
@@ -58,15 +59,21 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<Vehicle> getAll() throws TechnicalException, BusinessException {
         LOG.debug("Getting all vehicles");
-        return vehicleRepository.findAll();
+        return vehicleRepository.getVehicles();
     }
 
     @Override
     public void delete(@NotNull Long id) throws TechnicalException, BusinessException {
         LOG.debug("Deleting vehicle [id='{}']", id);
         Vehicle vehicle = get(id);
-        vehicleRepository.delete(vehicle);
+        vehicle.setEnabled(Boolean.FALSE);
+        vehicleRepository.save(vehicle);
     }
 
-
+    @Override
+    public Boolean isExist(@NotBlank String registrationNumber) {
+        LOG.info("Checking existence of vehicle by registration number [registrationNumber={}]", registrationNumber);
+        Long vehicleCount = vehicleRepository.checkRegistrationNumber(registrationNumber);
+        return vehicleCount > 0;
+    }
 }

@@ -14,14 +14,14 @@
         <div class="col-lg-6">
             <form:form method="post" action="/vehicle/create" modelAttribute="vehicle" cssClass="form-horizontal">
                 <div class="form-group">
-                    <form:label path="name">Nazwa</form:label>
-                    <form:input path="name" cssClass="form-control"/>
-                    <form:errors path="name" cssClass="help-block"/>
+                    <form:label path="registrationNumber">Numer rejstracyjny</form:label>
+                    <form:input path="registrationNumber" cssClass="form-control"/>
+                    <form:errors path="registrationNumber" cssClass="help-block"/>
                 </div>
                 <div class="form-group">
-                    <form:label path="description">Opis</form:label>
-                    <form:input path="description" cssClass="form-control"/>
-                    <form:errors path="description" cssClass="help-block"/>
+                    <form:label path="gpsLocator">Lokalizator GPS</form:label>
+                    <form:input path="gpsLocator" cssClass="form-control"/>
+                    <form:errors path="gpsLocator" cssClass="help-block"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Zapisz</button>
                 <a href="<c:url value="/vehicle/list"/>" class="btn btn-default">Anuluj</a>
